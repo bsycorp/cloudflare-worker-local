@@ -1,2 +1,7 @@
 FROM bitnami/node:12
-RUN npm install -g cloudflare-worker-local --unsafe-perm=true
+ADD /app /app/app
+ADD /lib /app/lib
+ADD /*.json /app/
+ADD /*js /app/
+WORKDIR /app
+RUN npm install --unsafe-perm=true
