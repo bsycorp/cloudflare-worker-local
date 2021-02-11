@@ -1,0 +1,17 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - '*'
+
+name: Build
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo ${{ secrets.DOCKERPASS }} | docker login -u ${{ secrets.DOCKERUSER }} --password-stdin
+          DOCKER_CONTENT_TRUST=1 docker build -t "bsycorp/cloudflare-worker-local:1.0.${{ github.run_number }}" .
+          docker push bsycorp/cloudflare-worker-local
