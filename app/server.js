@@ -20,8 +20,14 @@ async function callWorker(worker, req, res) {
   for (var pair of response.headers) {
     res.set(pair[0], pair[1]);
   }
-  
-  return streamPipeline(response.body, res);
+
+  //if body is a stream then stream it otherwise just return
+  if (typeof response.body.on === 'function') {
+    return streamPipeline(response.body, res);
+  } else {
+    const data = await response.arrayBuffer();
+    res.end(Buffer.from(data), "binary");
+  }
 }
 
 function buildKVStores(kvStoreFactory, kvStores) {
