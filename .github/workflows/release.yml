@@ -13,4 +13,4 @@ jobs:
       - run: |
           echo ${{ secrets.DOCKERPASS }} | docker login -u ${{ secrets.DOCKERUSER }} --password-stdin
           DOCKER_CONTENT_TRUST=1 docker build -t "bsycorp/cloudflare-worker-local:1.0.${{ github.run_number }}" .
-          docker push bsycorp/cloudflare-worker-local
+          docker push bsycorp/cloudflare-worker-local:1.0.${{ github.run_number }}
