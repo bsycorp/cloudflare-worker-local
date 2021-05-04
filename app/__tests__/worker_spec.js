@@ -37,6 +37,15 @@ describe("Workers", () => {
       expect(url.searchParams.get("foo")).toBe("bar");
     });
 
+    test("It has support for FormData", () => {
+      const worker = new Worker(
+        "foo.com",
+        'addEventListener("test", () => new FormData())'
+      );
+      const formData = worker.triggerEvent("test");
+      expect(formData).not.toBe(undefined);
+    });
+
     test("It has support for URLSearchParams", () => {
       const worker = new Worker("foo.com", `addEventListener('test', () => new URLSearchParams({ foo: 'bar' }))`);
       const params = worker.triggerEvent("test");

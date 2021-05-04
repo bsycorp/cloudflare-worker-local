@@ -86,6 +86,7 @@ class Worker {
       // URL Standards
       URL,
       URLSearchParams,
+      FormData,
 
       // bas64
       atob,
