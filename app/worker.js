@@ -7,6 +7,7 @@ const btoa = require("btoa");
 const crypto = new (require("node-webcrypto-ossl"))();
 const { TextDecoder, TextEncoder } = require("util");
 const { caches } = require("./caches");
+const FormData = require("form-data");
 
 function chomp(str) {
   return str.substr(0, str.length - 1);
