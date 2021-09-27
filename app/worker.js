@@ -8,6 +8,7 @@ const crypto = new (require("node-webcrypto-ossl"))();
 const { TextDecoder, TextEncoder } = require("util");
 const { caches } = require("./caches");
 const FormData = require("form-data");
+const AbortController = require("abort-controller");
 
 function chomp(str) {
   return str.substr(0, str.length - 1);
@@ -83,6 +84,7 @@ class Worker {
       Request,
       Response,
       Headers,
+      AbortController,
 
       // URL Standards
       URL,
